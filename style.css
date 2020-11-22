@@ -1,0 +1,125 @@
+html,body{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.banner{
+    height: 100px;
+    width: 100%;
+    background-color: gray;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+.main_heading{
+    flex-grow: 1;
+}
+.top_links{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style-type: none;
+    justify-content: left;
+    flex-grow: 2;
+    align-items: center;
+}
+.top_link{
+    padding-left: 1rem;
+    font-size: 1.25rem;
+}
+main{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.post{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+.post_side{
+    border-right: 1px solid black;
+    padding: 0.5rem;
+}
+
+.post_main{
+    padding: 0.5rem; 
+}
+
+.thread_info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile_box{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    margin-top: 2rem;
+}
+
+.profile_sidebar{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    float: right;
+    width: 15%;
+    align-items: center;
+    justify-content: space-around;
+}
+.avatar{
+    height: 100px;
+    width: 100px;
+    background-color: green;
+}
+.forum_list{
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+}
+.list_element{
+    padding: 1rem 0rem 1rem 1rem;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.list_heading, .current{
+    font-weight: bold;
+}
+
+.board_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form_label{
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 0.5rem ;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+}
+
+
+#posttext{
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+#title{
+    font-size: 1.1rem;
+}
+#submit{
+    font-size: 1.25rem;
+    float: right;
+}
