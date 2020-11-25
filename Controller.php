@@ -6,6 +6,8 @@ require_once "Database.php";
 require_once "DBInterface.php";
 
 require_once "DisplayPost.php";
+require_once "NewPost.php";
+require_once "ViewSite.php";
 require_once "IDisplayable.php";
 
 class Controller {
@@ -26,12 +28,11 @@ class Controller {
 
     function addPost ($name, $text) {
         $sql = "insert into Post values (001,current_timestamp(),\"$name\",\"$text\");";
-        //$this->DB->query($sql);
+        //$this->DB->query($post,$sql);
     }
 
     function getPost () {
         $sql = "";
-
     }
 
     function getPosts () {
@@ -42,8 +43,16 @@ class Controller {
         $sql = "";
     }
 
-    function getProfile () {
-        $sql = "";
+    function getProfile ($id) {
+        $sql = "select U.Username, concat_ws(\" \",U.FirstName, U.LastName) as FullName, U.JoinDate, AC.TypeName as AccType 
+        from Users U, AccountType AC 
+        where U.AccType = AC.ID
+        and AC.ID like $id;";
+        $result = $this->DB->query($profile,$sql);
+        if ($result->getSize() > 0) {
+            $result->getQuery();
+            $data = $result->getData();
+        }
     }
 }
 //$controller = new Controller(1);

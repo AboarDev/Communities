@@ -38,10 +38,10 @@ class Database extends AbstractDB implements DBInterface {
         $this->DB->query($sql);
     }
 
-    public function query($sql){
+    public function query($name,$sql){
         try {
             $queryResult = $this->DB->query($sql);
-            return new QueryResult($this,"", $queryResult);
+            return new QueryResult($this,$name, $queryResult);
         } catch (Exception $e) {
             throw new Exception($e);
         }

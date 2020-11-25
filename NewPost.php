@@ -1,33 +1,28 @@
 <?php
 require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
+require_once 'ViewSite.php';
 class NewPost extends AbstractDisplayable implements IDisplayable {
     var $data;
     public function  __construct($data,$child) {
         $this->data = $data;
         $this->child = $child;
-        //$this->subElements = [];
     }
 
     public function displayElement(){
         $this->displayStart();
-        $this->displayBodyStart();
         $this->displayBodyContent();
-        $this->displayBodyEnd();
         $this->displayEnd();
     }
 
     public function displayStart(){
-        echo "<div>";
+        echo "<main>
+        <form class=\"create_post\" action=\"MakePost.php\" method=\"post\">";
     }
 
     public function displayEnd(){
-        echo "</div>";
-    }
-
-    public function displayBodyStart(){
-        echo "<main>
-        <form class=\"create_post\" action=\"MakePost.php\" method=\"post\">";
+        echo "</form>
+        </main>";
     }
 
     public function displayBodyContent(){
@@ -43,8 +38,9 @@ class NewPost extends AbstractDisplayable implements IDisplayable {
         <button id=\"submit\">Submit</button>";
     }
 
-    public function displayBodyEnd(){
-        echo "</form>
-        </main>";
-    }
 }
+$data = [];
+$data["title"] = "New Post";
+$home = new NewPost(false,false);
+$frame = new ViewSite($data,$home);
+$frame->displayElement();
