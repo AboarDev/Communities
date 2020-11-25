@@ -20,11 +20,6 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         echo "<div class=\"post\">";
     }
 
-    public function displayEnd(){
-        echo "</div>
-        <br>";
-    }
-
     public function displayBodyContent(){
         $Username = $this->data["Username"];
         $postTitle = $this->data["PostTitle"];
@@ -36,6 +31,16 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         </div>
         <div class=\"post_main\">
         <h3>$postTitle</h3>
-        <p class=\"post_text\">$bodyText</p></div>";
+        <p class=\"post_text\">$bodyText</p>
+        <div>
+        <button>Delete</button>
+        <button>Edit</button>
+        <button>Like</button>
+        </div></div>";
+    }
+
+    public function displayEnd(){
+        echo "</div>
+        <br>";
     }
 }

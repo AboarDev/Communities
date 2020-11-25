@@ -16,7 +16,9 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
 
     public function displayStart(){
         $title = $this->data["title"] ?? '';
-        echo "<html lang=\"en\">
+        $lang = "en";
+        $style = "";
+        echo "<html lang=\"$lang\">
         <head>
             <title>$title</title>
             <link rel=\"stylesheet\" href=\"style.css\">
@@ -31,10 +33,6 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         <main>";
     }
 
-    public function displayEnd(){
-        echo "</main></html>";
-    }
-
     public function displayBodyContent(){
         if (is_array ( $this->child )){
             foreach ($this->child as &$child){
@@ -44,5 +42,9 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         else if ($this->child != false){
             $this->child->displayElement();
         }
+    }
+
+    public function displayEnd(){
+        echo "</main></html>";
     }
 }

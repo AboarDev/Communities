@@ -46,13 +46,14 @@ class Controller {
     }
 
     function getPosts ($postCallback) {
-        $sql = "select u.Username, p.PostTitle, p.PostText, p.PostTime
+        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
         where p.UserID = u.ID;";
-        $result = $this->DB->query("aaa",$sql);
+        $result = $this->DB->query("Posts",$sql);
         if ( $this->view != false && $result->getSize() > 0)
         {
-            while ($row = $result->getQuery()){
+            while ($row = $result->getQuery())
+            {
                 $postView = $postCallback($row);
                 $this->view->child[] = $postView;
             }

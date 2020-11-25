@@ -41,6 +41,6 @@ class NewPost extends AbstractDisplayable implements IDisplayable {
 }
 $data = [];
 $data["title"] = "New Post";
-$home = new NewPost(false,false);
-$frame = new ViewSite($data,$home);
+$home = new NewPost([],false);
+$frame = new ViewSite($data,[$home]);
 $frame->displayElement();

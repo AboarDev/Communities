@@ -18,28 +18,27 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
     }
 
     public function displayStart(){
-        //echo "<main>";
-    }
-
-    public function displayEnd(){
-        //echo "</main>";
+        echo "<form class=\"login\" action=\"Login.php\" method=\"post\">";
     }
 
     public function displayBodyContent(){
-        echo "<form class=\"login\" action=\"Login.php\" method=\"post\">
-        <div>
-        <label for=\"username\" class=\"form_label\">Username</label>
+        echo "<label for=\"username\" class=\"form_label\">Username</label>
         <input type=\"text\" id=\"username\" name=\"username\" minlength=\"2\" maxlength=\"30\">
         <label for=\"password\" class=\"form_label\">Password</label>
         <input name=\"password\" id=\"password\">
-        <button id=\"submit\">Submit</button>
-        </form>
+        <button id=\"submit\">Submit</button>";
+    }
+
+    public function displayEnd(){
+        echo "</form>
         <h2>Home</h2>";
     }
 
 }
-$home = new HomePage(false,false);
-$frame = new ViewSite([],[$home]);
+$data = [];
+$data["title"] = "Gaming Community";
+$home = new HomePage([],false);
+$frame = new ViewSite($data,[$home]);
 $controller = new Controller($frame);
 $controller->connect();
 $postCallback = function($data){
