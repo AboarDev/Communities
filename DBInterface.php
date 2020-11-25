@@ -9,7 +9,7 @@ interface DBInterface {
 
     public function createDB();
 
-    public function query($sql);
+    public function query($name,$sql);
 
     public function isError();
 }

@@ -1,4 +1,5 @@
 <?php
+require_once "Controller.php";
 require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
 require_once 'ViewSite.php';
@@ -40,4 +41,7 @@ $data = [];
 $data["title"] = "Home";
 $home = new HomePage(false,false);
 $frame = new ViewSite($data,$home);
-$frame->displayElement();
+$controller = new Controller($frame);
+$controller->connect();
+$controller->getPosts();
+$controller->display();

@@ -5,9 +5,6 @@ require_once "IResult.php";
 require_once "Database.php";
 require_once "DBInterface.php";
 
-require_once "DisplayPost.php";
-require_once "NewPost.php";
-require_once "ViewSite.php";
 require_once "IDisplayable.php";
 
 class Controller {
@@ -16,19 +13,32 @@ class Controller {
     var $config;
     function  __construct($view){
         $this->view = $view;
-        $this->DB = new Database("localhost","root","","GamingSite");
+        $this->DB = new Database("localhost","root","","gamingsite");
         $this->DB->intializeDB();
-        $this->DB->selectDB();
         $this->config;
     }
 
+    function connect () {
+        $this->DB->selectDB();
+    }
+
+    function initializeDB () {
+        //$this->DB->dropDB();
+        $this->DB->createDB();
+        $this->DB->selectDB();
+        $this->DB->makeTables();
+    }
+
     function display () {
-        $this->view->displayElement();
+        if ( $this->view != false )
+        {
+            $this->view->displayElement();
+        }
     }
 
     function addPost ($name, $text) {
-        $sql = "insert into Post values (001,current_timestamp(),\"$name\",\"$text\");";
-        //$this->DB->query($post,$sql);
+        $sql = "insert into Post values (null,001,current_timestamp(),\"$name\",\"$text\");";
+        $this->DB->query("aaa",$sql);
     }
 
     function getPost () {
@@ -36,7 +46,21 @@ class Controller {
     }
 
     function getPosts () {
-        $sql = "";
+        $sql = "select u.Username, p.PostTitle, p.PostText, p.PostTime
+        from post p, users u
+        where p.UserID = u.ID;";
+        $result = $this->DB->query("aaa",$sql);
+        //$result->getQuery();
+        while ($row = $result->getQuery()){
+            echo $row["PostTitle"] . $row["PostText"] . $row["Username"];
+        }
+        if ( $this->view != false && $result->getSize() > 0)
+        {
+            $this->view->child->data = $result->getQuery();
+            echo "set";
+        }
+        //echo var_dump($result->getQuery());
+        //echo $result->getSize();
     }
     
     function getPostsByTag () {
@@ -55,4 +79,3 @@ class Controller {
         }
     }
 }
-//$controller = new Controller(1);

@@ -34,7 +34,50 @@ class Database extends AbstractDB implements DBInterface {
 
     public function createDB(){
         //CREATE DATABASE IF NOT EXISTS DBname
-        $sql = "Create DATABASE IF NOT EXISTS $this->dbName";
+        $sql = "Create DATABASE $this->dbName";
+        $this->DB->query($sql);
+    }
+
+    public function makeTables() {
+        $sql = "create table AccountType (
+            ID int primary key,
+            TypeName varchar(10),
+            CanPost bool,
+            CanDelete bool,
+            CanEdit bool,
+            CanMove bool,
+            CanLock bool
+        );";
+        $this->DB->query($sql);
+        $sql = "create table Users (
+            ID int auto_increment primary key,
+            Username varchar(15),
+            LastName varchar(15),
+            FirstName varchar(15),
+            JoinDate date,
+            AccType int,
+            foreign key (AccType) references AccountType (ID)
+        );";
+        $this->DB->query($sql);
+        $sql = "create table Post (
+            PostNum int auto_increment primary key,
+            UserID int,
+            PostTime datetime,
+            PostTitle varchar(35),
+            PostText longtext,
+            foreign key(UserID) references Users (ID)
+        );";
+        $this->DB->query($sql);
+        $sql = "create table Tag (
+            TagID int auto_increment primary key,
+            TagName varchar(15)
+        );";
+        $this->DB->query($sql);
+        $sql = "create table PostTag (
+            PostNum int,
+            TagID int,
+            primary key (TagID,PostNum)
+        );";
         $this->DB->query($sql);
     }
 
@@ -43,6 +86,7 @@ class Database extends AbstractDB implements DBInterface {
             $queryResult = $this->DB->query($sql);
             return new QueryResult($this,$name, $queryResult);
         } catch (Exception $e) {
+            echo "exception";
             throw new Exception($e);
         }
     }

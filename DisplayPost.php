@@ -11,18 +11,13 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
 
     public function displayElement(){
         $this->displayStart();
-        $this->displayBodyStart();
         $this->displayBodyContent();
-        $this->displayBodyEnd();
         $this->displayEnd();
     }
 
     public function displayStart(){
-        $postTitle = $this->data["PostTitle"];
-        echo "<main><div class=\"thread_info\">
-        <h2>$postTitle</h2>
-        <strong>Number of Posts</strong>
-        </div>
+       
+        echo "<main>
         <div class=\"post\">";
     }
 
@@ -30,29 +25,23 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         echo "</div></main>";
     }
 
-    public function displayBodyStart(){
+    public function displayBodyContent(){
+        $Username = $this->data["Username"];
+        $postTitle = $this->data["PostTitle"];
+        $bodyText = $this->data["PostText"];
         echo "<div class=\"post_side\">
         <img class=\"avatar\">
-        <strong>Name</strong>
-        <button>Edit</button>
-        <button>Delete</button>
+        <br>
+        <strong>$Username</strong>
         </div>
         <div class=\"post_main\">
-        <p class=\"post_text\">";
-    }
-
-    public function displayBodyContent(){
-        $bodyText = $this->data["PostText"];
-        echo "$bodyText";
-    }
-
-    public function displayBodyEnd(){
-        echo "</p></div>";
+        <h3>$postTitle</h3>
+        <p class=\"post_text\">$bodyText</p></div>";
     }
 }
-$data = [];
-$data["PostText"] = "test";
-$data["PostTitle"] = "test";
-$post = new DisplayPost($data,false);
-$frame = new ViewSite(false,$post);
-$frame->displayElement();
+//$data = [];
+//$data["PostText"] = "test";
+//$data["PostTitle"] = "test";
+//$post = new DisplayPost($data,false);
+//$frame = new ViewSite(false,$post);
+//$frame->displayElement();

@@ -20,14 +20,14 @@ class QueryResult extends AbstractResult implements IResult {
     public function getQuery(){
         if ( $row = mysqli_fetch_array( $this->query , MYSQLI_ASSOC ))
         {
-            $this->data = $row;
+            return $row;
         }
         else {
-            $this->data = [];
+            return [];
         }
     }
 
     public function getData(){
-        return $this->data;
+        return [];
     }
 }

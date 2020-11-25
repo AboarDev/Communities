@@ -15,7 +15,7 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
     }
 
     public function displayStart(){
-        $title = $this->data["title"];
+        $title = $this->data["title"] ?? '';
         echo "<html lang=\"en\">
         <head>
             <title>$title</title>
@@ -25,6 +25,7 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         <ul class=\"top_links\">
             <li class=\"top_link\"><a href=\"_index.php\">Home</a></li>
             <li class=\"top_link\"><a class=\"current\" href=\"NewPost.php\">New Post</a></li>
+            <li class=\"top_link\"><a class=\"current\" href=\"ViewProfile.php\">My Profile</a></li>
         </ul>
         </nav>";
     }
@@ -40,5 +41,3 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         }
     }
 }
-//$viewSite = new ViewSite(false,false);
-//$viewSite->displayElement();
