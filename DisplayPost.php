@@ -17,12 +17,12 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
 
     public function displayStart(){
        
-        echo "<main>
-        <div class=\"post\">";
+        echo "<div class=\"post\">";
     }
 
     public function displayEnd(){
-        echo "</div></main>";
+        echo "</div>
+        <br>";
     }
 
     public function displayBodyContent(){
@@ -39,9 +39,3 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         <p class=\"post_text\">$bodyText</p></div>";
     }
 }
-//$data = [];
-//$data["PostText"] = "test";
-//$data["PostTitle"] = "test";
-//$post = new DisplayPost($data,false);
-//$frame = new ViewSite(false,$post);
-//$frame->displayElement();

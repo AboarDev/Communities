@@ -45,22 +45,18 @@ class Controller {
         $sql = "";
     }
 
-    function getPosts () {
+    function getPosts ($postCallback) {
         $sql = "select u.Username, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
         where p.UserID = u.ID;";
         $result = $this->DB->query("aaa",$sql);
-        //$result->getQuery();
-        while ($row = $result->getQuery()){
-            echo $row["PostTitle"] . $row["PostText"] . $row["Username"];
-        }
         if ( $this->view != false && $result->getSize() > 0)
         {
-            $this->view->child->data = $result->getQuery();
-            echo "set";
+            while ($row = $result->getQuery()){
+                $postView = $postCallback($row);
+                $this->view->child[] = $postView;
+            }
         }
-        //echo var_dump($result->getQuery());
-        //echo $result->getSize();
     }
     
     function getPostsByTag () {

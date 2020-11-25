@@ -3,6 +3,7 @@ require_once "Controller.php";
 require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
 require_once 'ViewSite.php';
+require_once 'DisplayPost.php';
 class HomePage extends AbstractDisplayable implements IDisplayable {
     var $data;
     public function  __construct($data,$child) {
@@ -17,11 +18,11 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
     }
 
     public function displayStart(){
-        echo "<main>";
+        //echo "<main>";
     }
 
     public function displayEnd(){
-        echo "</main>";
+        //echo "</main>";
     }
 
     public function displayBodyContent(){
@@ -37,11 +38,12 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
     }
 
 }
-$data = [];
-$data["title"] = "Home";
 $home = new HomePage(false,false);
-$frame = new ViewSite($data,$home);
+$frame = new ViewSite([],[$home]);
 $controller = new Controller($frame);
 $controller->connect();
-$controller->getPosts();
+$postCallback = function($data){
+    return new DisplayPost($data,false);
+};
+$controller->getPosts($postCallback);
 $controller->display();

@@ -27,16 +27,21 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
             <li class=\"top_link\"><a class=\"current\" href=\"NewPost.php\">New Post</a></li>
             <li class=\"top_link\"><a class=\"current\" href=\"ViewProfile.php\">My Profile</a></li>
         </ul>
-        </nav>";
+        </nav>
+        <main>";
     }
 
     public function displayEnd(){
-        echo "
-        </html>";
+        echo "</main></html>";
     }
 
     public function displayBodyContent(){
-        if ($this->child != false){
+        if (is_array ( $this->child )){
+            foreach ($this->child as &$child){
+                $child->displayElement();
+            }
+        }
+        else if ($this->child != false){
             $this->child->displayElement();
         }
     }
