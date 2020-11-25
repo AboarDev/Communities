@@ -23,8 +23,8 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         </head><nav>
         <h2 class=\"main_heading\">Gaming Community</h2>
         <ul class=\"top_links\">
-            <li class=\"top_link\"><a href=\"index.html\">Home</a></li>
-            <li class=\"top_link\"><a class=\"current\" href=\"forums.html\">Forums</a></li>
+            <li class=\"top_link\"><a href=\"_index.php\">Home</a></li>
+            <li class=\"top_link\"><a class=\"current\" href=\"NewPost.php\">New Post</a></li>
         </ul>
         </nav>";
     }

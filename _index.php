@@ -32,8 +32,7 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
         <input name=\"password\" id=\"password\">
         <button id=\"submit\">Submit</button>
         </form>
-        <h2>Home</h2>
-        <div><img class=\"banner\"></div>";
+        <h2>Home</h2>";
     }
 
 }
