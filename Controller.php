@@ -14,7 +14,10 @@ class Controller {
         $this->DB = new Database("localhost","root","","gamingsite");
         $this->DB->connect();
         $this->config;
-        session_start();
+        session_start();/* 
+        if (isset($_SESSION['signedIn'])) {
+            echo $_SESSION['signedIn'];
+        } */
     }
 
     function connect () {
@@ -28,23 +31,11 @@ class Controller {
     }
 
     function verify () {
-        //session_start();
-
-        /* if (!isset($_SESSION['count']))
-        {
-            $_SESSION['count'] = 0;
-        } 
-        else 
-        {
-            $_SESSION['count'] = $_SESSION['count'] + 1;
+        if (isset($_SESSION['signedIn'])) {
+            return $_SESSION['signedIn'];
+        }else {
+            return false;
         }
-        echo  $_SESSION['count'];
-        if (!isset($_SESSION['count']))
-        {
-            //$_SESSION['signedIn'] = true;
-            $_SESSION['userID'] = 14;
-        } 
-        echo $_SESSION['signedIn']; */
     }
 
     function display () {
@@ -55,7 +46,10 @@ class Controller {
     }
 
     function logout () {
-
+        if (isset($_SESSION['signedIn'])) {
+            $_SESSION['signedIn'] = false;
+            $_SESSION['userID'] = null;
+        }
     }
 
     function login($username,$password){
@@ -72,6 +66,7 @@ class Controller {
         }
         else {
             $_SESSION['signedIn'] = false;
+            $_SESSION['userID'] = null;
             return false;
         }
     }
@@ -82,8 +77,17 @@ class Controller {
     }
 
     function addPost ($name, $text) {
-        $sql = "insert into Post values (null,001,current_timestamp(),\"$name\",\"$text\");";
-        $this->DB->query("aaa",$sql);
+        if ($this->verify()){
+            $id = $_SESSION['userID'];
+            if ($id != null){
+                //echo $id;
+                $sql = "insert into Post values (null,$id,current_timestamp(),\"$name\",\"$text\");";
+                $this->DB->query("aaa",$sql);
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     function getPost ($id) {

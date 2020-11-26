@@ -12,9 +12,12 @@ $controller = new Controller(1);
 $controller->connect();
 
 if (strlen($title) > 0){
-    $controller->addPost($title,$text);
-    
-    echo "Made Post <a href=\"_index.php\">Go Back</a>";
+    if ($controller->addPost($title,$text)){
+        echo "Made Post <a href=\"_index.php\">Go Back</a>";
+    } else {
+        echo "Failed to make post <a href=\"_index.php\">Go Back</a>";
+    }
+} else {
+    echo "Failed to make post <a href=\"_index.php\">Go Back</a>";
 }
-
 ?>
