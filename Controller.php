@@ -14,6 +14,7 @@ class Controller {
         $this->DB = new Database("localhost","root","","gamingsite");
         $this->DB->connect();
         $this->config;
+        session_start();
     }
 
     function connect () {
@@ -27,8 +28,9 @@ class Controller {
     }
 
     function verify () {
-        session_start();
-        if (!isset($_SESSION['count']))
+        //session_start();
+
+        /* if (!isset($_SESSION['count']))
         {
             $_SESSION['count'] = 0;
         } 
@@ -42,7 +44,7 @@ class Controller {
             //$_SESSION['signedIn'] = true;
             $_SESSION['userID'] = 14;
         } 
-        echo $_SESSION['signedIn'];
+        echo $_SESSION['signedIn']; */
     }
 
     function display () {
@@ -50,6 +52,10 @@ class Controller {
         {
             $this->view->displayElement();
         }
+    }
+
+    function logout () {
+
     }
 
     function login($username,$password){
@@ -60,15 +66,13 @@ class Controller {
         $data = $result->getQuery();
         $hash = $data["PWD"];
         if (password_verify($password,$hash)){
-            session_start();
             $_SESSION['signedIn'] = true;
             $_SESSION['userID'] = $data["ID"];
-            echo "true";
+            return true;
         }
         else {
-            session_start();
             $_SESSION['signedIn'] = false;
-            echo "false";
+            return false;
         }
     }
 

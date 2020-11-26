@@ -16,9 +16,13 @@ $controller = new Controller(false);
 
 $controller->connect();
 
-$controller->login($username,$password);
+if($controller->login($username,$password)){
+    echo "Logged In <a href=\"_index.php\">Go Back</a>";
+} else {
+    echo "Failed to log in <a href=\"_index.php\">Go Back</a>";
+}
 
-$controller->verify();
+//$controller->verify();
 /* 
 if ($loginSuccessful){
     session_start();
