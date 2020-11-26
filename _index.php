@@ -45,4 +45,5 @@ $postCallback = function($data){
     return new DisplayPost($data,false);
 };
 $controller->getPosts($postCallback);
+$controller->verify();
 $controller->display();

@@ -26,6 +26,25 @@ class Controller {
         $this->DB->makeTables();
     }
 
+    function verify () {
+        session_start();
+        if (!isset($_SESSION['count']))
+        {
+            $_SESSION['count'] = 0;
+        } 
+        else 
+        {
+            $_SESSION['count'] = $_SESSION['count'] + 1;
+        }
+        echo  $_SESSION['count'];
+        if (!isset($_SESSION['count']))
+        {
+            //$_SESSION['signedIn'] = true;
+            $_SESSION['userID'] = 14;
+        } 
+        echo $_SESSION['signedIn'];
+    }
+
     function display () {
         if ( $this->view != false )
         {
@@ -33,20 +52,23 @@ class Controller {
         }
     }
 
-    function verify($username,$password){
-        $sql = "select u.Username, u.PWD
+    function login($username,$password){
+        $sql = "select u.Username, u.PWD, u.ID
         from users u 
         where u.Username = \"$username\";";
         $result = $this->DB->query("aaa",$sql);
         $data = $result->getQuery();
         $hash = $data["PWD"];
         if (password_verify($password,$hash)){
+            session_start();
+            $_SESSION['signedIn'] = true;
+            $_SESSION['userID'] = $data["ID"];
             echo "true";
-            return true;
         }
         else {
+            session_start();
+            $_SESSION['signedIn'] = false;
             echo "false";
-            return false;
         }
     }
 

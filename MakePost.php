@@ -17,5 +17,4 @@ if (strlen($title) > 0){
     echo "Made Post <a href=\"_index.php\">Go Back</a>";
 }
 
-
 ?>
