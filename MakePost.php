@@ -11,8 +11,11 @@ $controller = new Controller(1);
 
 $controller->connect();
 
-$controller->addPost($title,$text);
+if (strlen($title) > 0){
+    $controller->addPost($title,$text);
+    
+    echo "Made Post <a href=\"_index.php\">Go Back</a>";
+}
 
-echo "Made Post <a href=\"_index.php\">Go Back</a>";
 
 ?>

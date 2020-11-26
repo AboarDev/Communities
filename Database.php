@@ -15,7 +15,7 @@ class Database extends AbstractDB implements DBInterface {
         $this->DB;
     }
 
-    public function intializeDB(){
+    public function connect(){
         $this->DB = new mysqli($this->host, $this->username, $this->pwd);
     }
 
@@ -52,6 +52,7 @@ class Database extends AbstractDB implements DBInterface {
         $sql = "create table Users (
             ID int auto_increment primary key,
             Username varchar(15),
+            PWD varchar(60),
             LastName varchar(15),
             FirstName varchar(15),
             JoinDate date,

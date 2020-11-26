@@ -1,7 +1,7 @@
 <?php
 
 interface DBInterface {
-    public function intializeDB();
+    public function connect();
 
     public function closeDB();
 

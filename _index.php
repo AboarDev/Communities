@@ -25,7 +25,7 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
         echo "<label for=\"username\" class=\"form_label\">Username</label>
         <input type=\"text\" id=\"username\" name=\"username\" minlength=\"2\" maxlength=\"30\">
         <label for=\"password\" class=\"form_label\">Password</label>
-        <input name=\"password\" id=\"password\">
+        <input name=\"password\" id=\"password\" type=\"password\">
         <button id=\"submit\">Submit</button>";
     }
 

@@ -1,0 +1,18 @@
+<?php
+require_once "Controller.php";
+
+//echo var_dump($_REQUEST);
+
+$username = $_REQUEST["username"];
+
+$password = $_REQUEST["password"];
+
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+$controller = new Controller(false);
+
+$controller->connect();
+
+$controller->register($username,$hash);
+
+echo "Registered Account <a href=\"_index.php\">Go Back</a>";

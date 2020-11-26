@@ -24,13 +24,14 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         $Username = $this->data["Username"];
         $postTitle = $this->data["PostTitle"];
         $bodyText = $this->data["PostText"];
+        $id = $this->data["PostNum"];
         echo "<div class=\"post_side\">
         <img class=\"avatar\">
         <br>
         <strong>$Username</strong>
         </div>
         <div class=\"post_main\">
-        <h3>$postTitle</h3>
+        <a href=\"post.php?id=$id\"><h3>$postTitle</h3></a>
         <p class=\"post_text\">$bodyText</p>
         <div>
         <button>Delete</button>
