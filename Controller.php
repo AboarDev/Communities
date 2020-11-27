@@ -38,8 +38,22 @@ class Controller {
     function display () {
         if ( $this->view != false )
         {
+            if ($this->verify()){
+                $this->view->data["signedIn"] = true;
+                $this->view->data["username"] = $this->getUsername();
+            }else {
+                $this->view->data["signedIn"] = false;
+            }
+            
             $this->view->displayElement();
         }
+    }
+
+    function getUsername (){
+        if (isset($_SESSION['Username'])){
+            return $_SESSION['username'];
+        }
+        return "";
     }
 
     function logout () {
@@ -59,6 +73,7 @@ class Controller {
         if (password_verify($password,$hash)){
             $_SESSION['signedIn'] = true;
             $_SESSION['userID'] = $data["ID"];
+            $_SESSION['Username'] = $data["Username"];
             return true;
         }
         else {
@@ -108,7 +123,8 @@ class Controller {
     function getPosts ($postCallback) {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
-        where p.UserID = u.ID;";
+        where p.UserID = u.ID
+        order by p.PostTime desc;";
         $result = $this->DB->query("Posts",$sql);
         if ( $this->view != false && $result->getSize() > 0)
         {
@@ -118,10 +134,6 @@ class Controller {
                 $this->view->child[] = $postView;
             }
         }
-    }
-    
-    function getPostsByTag () {
-        $sql = "";
     }
 
     function getProfile ($id) {

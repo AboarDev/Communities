@@ -26,7 +26,7 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
         <input type=\"text\" id=\"username\" name=\"username\" minlength=\"2\" maxlength=\"30\">
         <label for=\"password\" class=\"form_label\">Password</label>
         <input name=\"password\" id=\"password\" type=\"password\">
-        <button id=\"submit\">Submit</button>";
+        <button id=\"submit\">Log In</button>";
     }
 
     public function displayEnd(){

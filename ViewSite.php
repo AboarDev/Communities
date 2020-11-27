@@ -18,6 +18,14 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         $title = $this->data["title"] ?? '';
         $lang = "en";
         $style = "";
+        $signedIn = "";
+        $logout = "";
+        if ($this->data["signedIn"] ?? false){
+            $signedIn = "Logged In" ." as ". $this->data["username"] ?? '';
+            $logout = "
+            <li class=\"top_link\"><a class=\"current\" href=\"logout.php\">Log Out</a></li>";
+        }
+        //$username = $this->data["username"] ?? 'My Profile';;
         echo "<html lang=\"$lang\">
         <head>
             <title>$title</title>
@@ -28,6 +36,8 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
             <li class=\"top_link\"><a href=\"index.php\">Home</a></li>
             <li class=\"top_link\"><a class=\"current\" href=\"create.php\">New Post</a></li>
             <li class=\"top_link\"><a class=\"current\" href=\"profile.php\">My Profile</a></li>
+            $logout
+            <li class=\"top_link\">$signedIn</li>
         </ul>
         </nav>
         <main>";
