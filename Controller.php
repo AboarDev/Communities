@@ -50,7 +50,7 @@ class Controller {
     }
 
     function getUsername (){
-        if (isset($_SESSION['Username'])){
+        if (isset($_SESSION['username'])){
             return $_SESSION['username'];
         }
         return "";
@@ -58,11 +58,9 @@ class Controller {
 
     function logout () {
         if (isset($_SESSION['signedIn'])) {
-            //$_SESSION['signedIn'] = false;
-            //$_SESSION['userID'] = null;
             unset($_SESSION['signedIn']);
             unset($_SESSION['userID']);
-            unset($_SESSION['Username']);
+            unset($_SESSION['username']);
         }
     }
 
@@ -80,8 +78,8 @@ class Controller {
             return true;
         }
         else {
-            $_SESSION['signedIn'] = false;
-            $_SESSION['userID'] = null;
+            //$_SESSION['signedIn'] = false;
+            //$_SESSION['userID'] = null;
             return false;
         }
     }

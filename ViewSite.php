@@ -25,7 +25,6 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
             $logout = "
             <li class=\"top_link\"><a href=\"logout.php\">Log Out</a></li>";
         }
-        //$username = $this->data["username"] ?? 'My Profile';;
         echo "<html lang=\"$lang\">
         <head>
             <title>$title</title>
