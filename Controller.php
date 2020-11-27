@@ -14,10 +14,7 @@ class Controller {
         $this->DB = new Database("localhost","root","","gamingsite");
         $this->DB->connect();
         $this->config;
-        session_start();/* 
-        if (isset($_SESSION['signedIn'])) {
-            echo $_SESSION['signedIn'];
-        } */
+        session_start();
     }
 
     function connect () {
@@ -76,11 +73,23 @@ class Controller {
         $this->DB->query("aaa",$sql);
     }
 
+    function deletePost ($id){
+        $sql = "delete from Post p
+        where p.PostNum = $id;";
+        $this->DB->query("aaa",$sql);
+    }
+
+    function editPost ($id,$newText){
+        $sql = "update Post p
+        set p.PostText = '$newText'
+        where p.PostNum = $id;";
+        $this->DB->query("aaa",$sql);
+    }
+
     function addPost ($name, $text) {
         if ($this->verify()){
             $id = $_SESSION['userID'];
             if ($id != null){
-                //echo $id;
                 $sql = "insert into Post values (null,$id,current_timestamp(),\"$name\",\"$text\");";
                 $this->DB->query("aaa",$sql);
                 return true;
