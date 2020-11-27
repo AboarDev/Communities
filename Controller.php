@@ -58,22 +58,25 @@ class Controller {
 
     function logout () {
         if (isset($_SESSION['signedIn'])) {
-            $_SESSION['signedIn'] = false;
-            $_SESSION['userID'] = null;
+            //$_SESSION['signedIn'] = false;
+            //$_SESSION['userID'] = null;
+            unset($_SESSION['signedIn']);
+            unset($_SESSION['userID']);
+            unset($_SESSION['Username']);
         }
     }
 
     function login($username,$password){
-        $sql = "select u.Username, u.PWD, u.ID
+        $sql = "select u.username, u.PWD, u.ID
         from users u 
-        where u.Username = \"$username\";";
+        where u.username = \"$username\";";
         $result = $this->DB->query("aaa",$sql);
         $data = $result->getQuery();
         $hash = $data["PWD"];
         if (password_verify($password,$hash)){
             $_SESSION['signedIn'] = true;
             $_SESSION['userID'] = $data["ID"];
-            $_SESSION['Username'] = $data["Username"];
+            $_SESSION['username'] = $data["username"];
             return true;
         }
         else {

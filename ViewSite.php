@@ -23,7 +23,7 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         if ($this->data["signedIn"] ?? false){
             $signedIn = "Logged In" ." as ". $this->data["username"] ?? '';
             $logout = "
-            <li class=\"top_link\"><a class=\"current\" href=\"logout.php\">Log Out</a></li>";
+            <li class=\"top_link\"><a href=\"logout.php\">Log Out</a></li>";
         }
         //$username = $this->data["username"] ?? 'My Profile';;
         echo "<html lang=\"$lang\">
@@ -34,8 +34,8 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         <h2 class=\"main_heading\">Gaming Community</h2>
         <ul class=\"top_links\">
             <li class=\"top_link\"><a href=\"index.php\">Home</a></li>
-            <li class=\"top_link\"><a class=\"current\" href=\"create.php\">New Post</a></li>
-            <li class=\"top_link\"><a class=\"current\" href=\"profile.php\">My Profile</a></li>
+            <li class=\"top_link\"><a href=\"create.php\">New Post</a></li>
+            <li class=\"top_link\"><a href=\"profile.php\">My Profile</a></li>
             $logout
             <li class=\"top_link\">$signedIn</li>
         </ul>

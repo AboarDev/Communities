@@ -11,5 +11,5 @@ if($controller->verify()){
     $controller->deletePost($id);
     echo "Deleted Post <a href=\"index.php\">Go Back</a>";
 } else {
-    echo "Failed to delete post <a href=\"index.php\">Go Back</a>";
+    echo "Failed to delete post, either post not found or unauthorized to delete post <a href=\"index.php\">Go Back</a>";
 }
