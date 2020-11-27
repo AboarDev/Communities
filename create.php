@@ -38,21 +38,30 @@ class NewPost extends AbstractDisplayable implements IDisplayable {
         <textarea name=\"posttext\" id=\"posttext\" cols=\"30\" rows=\"10\">$text</textarea>
         <br />
         <button id=\"submit\">Submit</button>";
+        if ($this->data["edit"] ?? false){
+            echo "<input name=\"edit\" value=\"true\" type=\"hidden\">";
+        }
     }
 
 }
 $data = [];
 if (isset($_REQUEST["edit"])){
-    //echo $_REQUEST["edit"];
-    //echo $_REQUEST["id"];
-    $data["title"] = "Edit Post";
+    $data["title"] = "New Post";
+    $frame = new ViewSite($data,[]);
+    require_once "Controller.php";
+    $controller = new Controller($frame);
+    $controller->connect();
+    $post = $controller->getPost($_REQUEST["id"]);
     $data["edit"] = true;
-    $data["bodyText"] = "New Text";
-    $data["postTitle"] = "New Title";
+    $data["bodyText"] = $post["PostTitle"];
+    $data["postTitle"] = $post["PostText"];
+    $home = new NewPost($data,false);
+    $frame->child[] = $home;
+    $controller->display();
 } else{
     $data["title"] = "New Post";
     $data["edit"] = false;
+    $home = new NewPost($data,false);
+    $frame = new ViewSite($data,[$home]);
+    $frame->displayElement();
 }
-$home = new NewPost($data,false);
-$frame = new ViewSite($data,[$home]);
-$frame->displayElement();

@@ -119,6 +119,8 @@ class Controller {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
         where p.PostNum = $id;";
+        $result = $this->DB->query("Posts",$sql);
+        return $result->getQuery();
     }
 
     function getPosts ($postCallback) {
