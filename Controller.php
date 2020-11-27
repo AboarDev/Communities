@@ -74,8 +74,8 @@ class Controller {
     }
 
     function deletePost ($id){
-        $sql = "delete from Post p
-        where p.PostNum = $id;";
+        $sql = "delete from Post
+        where PostNum = $id;";
         $this->DB->query("aaa",$sql);
     }
 

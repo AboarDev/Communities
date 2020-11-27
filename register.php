@@ -15,4 +15,4 @@ $controller->connect();
 
 $controller->register($username,$hash);
 
-echo "Registered Account <a href=\"_index.php\">Go Back</a>";
+echo "Registered Account <a href=\"index.php\">Go Back</a>";

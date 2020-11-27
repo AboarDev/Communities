@@ -10,9 +10,9 @@ $controller = new Controller(false);
 $controller->connect();
 
 if($controller->login($username,$password)){
-    echo "Logged In <a href=\"_index.php\">Go Back</a>";
+    echo "Logged In <a href=\"index.php\">Go Back</a>";
 } else {
-    echo "Failed to log in <a href=\"_index.php\">Go Back</a>";
+    echo "Failed to log in <a href=\"index.php\">Go Back</a>";
 }
 
 //$controller->verify();
