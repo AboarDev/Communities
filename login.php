@@ -1,16 +1,28 @@
 <?php
 require_once "Controller.php";
+require_once "config.php";
+
 
 $username = $_REQUEST["username"];
 
 $password = $_REQUEST["password"];
+
+$config = new Config();
+
+$data = $config->getConfig();
+
+$goBack = $data["back"] ?? '';
+
+$success = $data["success"] ?? '';
+
+$failed = $data["failed"] ?? '';
 
 $controller = new Controller(false);
 
 $controller->connect();
 
 if($controller->login($username,$password)){
-    echo "Logged In <a href=\"index.php\">Go Back</a>";
+    echo "$success <a href=\"index.php\">$goBack</a>";
 } else {
-    echo "Failed to log in <a href=\"index.php\">Go Back</a>";
+    echo "$failed <a href=\"index.php\">$goBack</a>";
 }

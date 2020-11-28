@@ -1,7 +1,19 @@
 <?php
 require_once "Controller.php";
+require_once "config.php";
+
 
 $id = $_REQUEST["id"];
+
+$config = new Config();
+
+$data = $config->getConfig();
+
+$goBack = $data["back"] ?? '';
+
+$success = $data["success"] ?? '';
+
+$failed = $data["failed"] ?? '';
 
 $controller = new Controller(false);
 
@@ -9,7 +21,7 @@ $controller->connect();
 
 if($controller->verify()){
     $controller->deletePost($id);
-    echo "Deleted Post <a href=\"index.php\">Go Back</a>";
+    echo "$success <a href=\"index.php\">$goBack</a>";
 } else {
-    echo "Failed to delete post, either post not found or unauthorized to delete post <a href=\"index.php\">Go Back</a>";
+    echo "$failed <a href=\"index.php\">$goBack</a>";
 }

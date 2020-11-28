@@ -2,6 +2,8 @@
 require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
 require_once 'ViewSite.php';
+require_once "config.php";
+
 class NewPost extends AbstractDisplayable implements IDisplayable {
     var $data;
     public function  __construct($data,$child) {
