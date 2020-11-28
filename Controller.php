@@ -8,25 +8,27 @@ require_once "IDisplayable.php";
 class Controller {
     var $view;
     var $DB;
-    //var $config;
-    function  __construct($view){
+    function  __construct($view)
+    {
         $this->view = $view;
         $this->DB = new Database("localhost","root","","gamingsite");
         $this->DB->connect();
-        //$this->config = $this->loadConfig();
         session_start();
     }
-    function connect () {
+    function connect ()
+    {
         $this->DB->selectDB();
     }
 
-    function initializeDB () {
+    function initializeDB ()
+    {
         $this->DB->createDB();
         $this->DB->selectDB();
         $this->DB->makeTables();
     }
 
-    function verify () {
+    function verify (): bool 
+    {
         if (isset($_SESSION['signedIn'])) {
             return $_SESSION['signedIn'];
         }else {
@@ -34,7 +36,8 @@ class Controller {
         }
     }
 
-    function display () {
+    function display ()
+    {
         if ( $this->view != false )
         {
             if ($this->verify()){
@@ -48,14 +51,16 @@ class Controller {
         }
     }
 
-    function getUsername (){
+    function getUsername ():string 
+    {
         if (isset($_SESSION['username'])){
             return $_SESSION['username'];
         }
         return "";
     }
 
-    function logout () {
+    function logout ()
+    {
         if (isset($_SESSION['signedIn'])) {
             unset($_SESSION['signedIn']);
             unset($_SESSION['userID']);
@@ -63,7 +68,8 @@ class Controller {
         }
     }
 
-    function login($username,$password){
+    function login(string $username,string $password) : bool
+    {
         $sql = "select u.username, u.PWD, u.ID
         from users u 
         where u.username = \"$username\";";
@@ -81,25 +87,29 @@ class Controller {
         }
     }
 
-    function register($username,$hash){
+    function register(string $username,string $hash)
+    {
         $sql = "insert into Users values (null,'$username','$hash','Kamijou','Touma',current_date(),3);";
         $this->DB->query("aaa",$sql);
     }
 
-    function deletePost ($id){
+    function deletePost (int $id)
+    {
         $sql = "delete from Post
         where PostNum = $id;";
         $this->DB->query("aaa",$sql);
     }
 
-    function editPost ($id,$newTitle,$newText){
+    function editPost (int $id, string $newTitle, string $newText)
+    {
         $sql = "update Post p
         set p.PostTitle = '$newTitle', p.PostText = '$newText'
         where p.PostNum = $id;";
         $this->DB->query("aaa",$sql);
     }
 
-    function addPost ($name, $text) {
+    function addPost (string $name,string $text) : bool
+    {
         if ($this->verify()){
             $id = $_SESSION['userID'];
             if ($id != null){
@@ -112,7 +122,8 @@ class Controller {
         return false;
     }
 
-    function getPost ($id) {
+    function getPost (int $id)
+    {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
         where p.PostNum = $id;";
@@ -120,7 +131,8 @@ class Controller {
         return $result->getQuery();
     }
 
-    function getPosts ($postCallback) {
+    function getPosts ($postCallback)
+    {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
         where p.UserID = u.ID
@@ -136,7 +148,26 @@ class Controller {
         }
     }
 
-    function getProfile ($id) {
+    function getPostsByName ($postCallback, string $username)
+    {
+        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
+        from post p, users u
+        where p.UserID = u.ID
+        and u.Username like \"$username\"
+        order by p.PostTime desc;";
+        $result = $this->DB->query("Posts",$sql);
+        if ( $this->view != false && $result->getSize() > 0)
+        {
+            while ($row = $result->getQuery())
+            {
+                $postView = $postCallback($row);
+                $this->view->child[] = $postView;
+            }
+        }
+    }
+
+    function getProfile (int $id)
+    {
         $sql = "select U.Username, concat_ws(\" \",U.FirstName, U.LastName) as FullName, U.JoinDate, AC.TypeName as AccType 
         from Users U, AccountType AC 
         where U.AccType = AC.ID

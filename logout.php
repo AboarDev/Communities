@@ -9,10 +9,14 @@ $data = $config->getConfig();
 
 $goBack = $data["back"] ?? '';
 
+$success = $data["success"] ?? '';
+
+$failed = $data["failed"] ?? '';
+
 $controller = new Controller(false);
 
 $controller->connect();
 
 $controller->logout();
 
-echo "Logged Out <a href=\"index.php\">$goBack</a>";
+echo "$success <a href=\"index.php\">$goBack</a>";
