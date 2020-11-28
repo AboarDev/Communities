@@ -15,12 +15,12 @@ class Controller {
         $this->DB->connect();
         session_start();
     }
-    function connect ()
+    function connect (): void
     {
         $this->DB->selectDB();
     }
 
-    function initializeDB ()
+    function initializeDB () : void
     {
         $this->DB->createDB();
         $this->DB->selectDB();
@@ -36,7 +36,7 @@ class Controller {
         }
     }
 
-    function display ()
+    function display () : void
     {
         if ( $this->view != false )
         {
@@ -59,7 +59,7 @@ class Controller {
         return "";
     }
 
-    function logout ()
+    function logout () : void
     {
         if (isset($_SESSION['signedIn'])) {
             unset($_SESSION['signedIn']);
@@ -87,20 +87,14 @@ class Controller {
         }
     }
 
-    function register(string $username,string $hash)
-    {
-        $sql = "insert into Users values (null,'$username','$hash','Kamijou','Touma',current_date(),3);";
-        $this->DB->query("aaa",$sql);
-    }
-
-    function deletePost (int $id)
+    function deletePost (int $id) : void
     {
         $sql = "delete from Post
         where PostNum = $id;";
         $this->DB->query("aaa",$sql);
     }
 
-    function editPost (int $id, string $newTitle, string $newText)
+    function editPost (int $id, string $newTitle, string $newText) : void
     {
         $sql = "update Post p
         set p.PostTitle = '$newTitle', p.PostText = '$newText'
@@ -122,16 +116,7 @@ class Controller {
         return false;
     }
 
-    function getPost (int $id)
-    {
-        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
-        from post p, users u
-        where p.PostNum = $id;";
-        $result = $this->DB->query("Posts",$sql);
-        return $result->getQuery();
-    }
-
-    function getPosts ($postCallback)
+    function getPosts ($postCallback) : void
     {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
@@ -148,7 +133,7 @@ class Controller {
         }
     }
 
-    function getPostsByName ($postCallback, string $username)
+    function getPostsByName ($postCallback, string $username) : void
     {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
         from post p, users u
@@ -163,19 +148,6 @@ class Controller {
                 $postView = $postCallback($row);
                 $this->view->child[] = $postView;
             }
-        }
-    }
-
-    function getProfile (int $id)
-    {
-        $sql = "select U.Username, concat_ws(\" \",U.FirstName, U.LastName) as FullName, U.JoinDate, AC.TypeName as AccType 
-        from Users U, AccountType AC 
-        where U.AccType = AC.ID
-        and AC.ID like $id;";
-        $result = $this->DB->query($profile,$sql);
-        if ($result->getSize() > 0) {
-            $result->getQuery();
-            $data = $result->getData();
         }
     }
 }
