@@ -95,7 +95,7 @@ class Controller {
 
     function editPost ($id,$newTitle,$newText){
         $sql = "update Post p
-        set p.PostText = '$newText'
+        set p.PostTitle = '$newTitle', p.PostText = '$newText'
         where p.PostNum = $id;";
         $this->DB->query("aaa",$sql);
     }

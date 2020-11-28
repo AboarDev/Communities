@@ -56,8 +56,8 @@ if (isset($_REQUEST["edit"])){
     $post = $controller->getPost($_REQUEST["id"]);
     $data["edit"] = true;
     $data["id"] = $_REQUEST["id"];
-    $data["bodyText"] = $post["PostTitle"];
-    $data["postTitle"] = $post["PostText"];
+    $data["bodyText"] = $post["PostText"];
+    $data["postTitle"] = $post["PostTitle"];
     $home = new NewPost($data,false);
     $frame->child[] = $home;
     $controller->display();
