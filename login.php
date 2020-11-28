@@ -14,11 +14,3 @@ if($controller->login($username,$password)){
 } else {
     echo "Failed to log in <a href=\"index.php\">Go Back</a>";
 }
-
-//$controller->verify();
-/* 
-if ($loginSuccessful){
-    session_start();
-    $_SESSION['signedIn'] = true;
-    session_write_close();
-} */

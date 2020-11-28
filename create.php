@@ -39,7 +39,9 @@ class NewPost extends AbstractDisplayable implements IDisplayable {
         <br />
         <button id=\"submit\">Submit</button>";
         if ($this->data["edit"] ?? false){
-            echo "<input name=\"edit\" value=\"true\" type=\"hidden\">";
+            $id = $this->data["id"] ?? null;
+            echo "<input name=\"edit\" value=\"true\" type=\"hidden\">
+            <input name=\"id\" value=\"$id\" type=\"hidden\">";
         }
     }
 
@@ -53,6 +55,7 @@ if (isset($_REQUEST["edit"])){
     $controller->connect();
     $post = $controller->getPost($_REQUEST["id"]);
     $data["edit"] = true;
+    $data["id"] = $_REQUEST["id"];
     $data["bodyText"] = $post["PostTitle"];
     $data["postTitle"] = $post["PostText"];
     $home = new NewPost($data,false);

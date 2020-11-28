@@ -9,14 +9,16 @@ $text = $_REQUEST["posttext"];
 
 $edit = $_REQUEST["edit"] ?? false;
 
+$id = $_REQUEST["id"] ?? null;
+
 $controller = new Controller(false);
 
 $controller->connect();
 
-echo var_dump($_REQUEST);
-
 if ($edit){
-
+    $controller->verify();
+    $post = $controller->getPost();
+    echo $id;
 } else {
     if (strlen($title) > 0){
         if ($controller->addPost($title,$text)){

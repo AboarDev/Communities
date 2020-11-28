@@ -78,8 +78,6 @@ class Controller {
             return true;
         }
         else {
-            //$_SESSION['signedIn'] = false;
-            //$_SESSION['userID'] = null;
             return false;
         }
     }
@@ -95,7 +93,7 @@ class Controller {
         $this->DB->query("aaa",$sql);
     }
 
-    function editPost ($id,$newText){
+    function editPost ($id,$newTitle,$newText){
         $sql = "update Post p
         set p.PostText = '$newText'
         where p.PostNum = $id;";
