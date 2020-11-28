@@ -21,6 +21,9 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
     }
 
     public function displayBodyContent(){
+        $delete = $this->data["delete"] ?? '';
+        $edit = $this->data["edit"] ?? '';
+
         $Username = $this->data["Username"];
         $postTitle = $this->data["PostTitle"];
         $bodyText = $this->data["PostText"];
@@ -34,8 +37,8 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         <a href=\"post.php?id=$id\"><h3>$postTitle</h3></a>
         <p class=\"post_text\">$bodyText</p>
         <div>
-        <a href=\"delete.php?id=$id\">Delete</a>
-        <a href=\"create.php?edit=true&id=$id\">Edit</a>
+        <a href=\"delete.php?id=$id\">$delete</a>
+        <a href=\"create.php?edit=true&id=$id\">$edit</a>
         </div></div>";
     }
 
