@@ -1,7 +1,7 @@
 <?php
-
 require_once "Controller.php";
 require_once 'ViewSite.php';
+require_once "config.php";
 
 $title = $_REQUEST["title"];
 
@@ -11,20 +11,30 @@ $edit = $_REQUEST["edit"] ?? false;
 
 $id = $_REQUEST["id"] ?? null;
 
+$config = new Config();
+
+$data = $config->getConfig();
+
+$goBack = $data["back"] ?? '';
+
+$success = $data["success"] ?? '';
+
+$failed = $data["failed"] ?? '';
+
 $controller = new Controller(false);
 
 $controller->connect();
 
 if ($edit && $controller->verify()){
     $controller->editPost($id,$title,$text);
-    echo "Edited Post <a href=\"index.php\">Go Back</a>";
+    echo "$success <a href=\"index.php\">$goBack</a>";
 } else if (strlen($title) > 0){
     if ($controller->addPost($title,$text)){
-        echo "Made Post <a href=\"index.php\">Go Back</a>";
+        echo "$success <a href=\"index.php\">$goBack</a>";
     } else {
-        echo "Failed to make post <a href=\"index.php\">Go Back</a>";
+        echo "$failed <a href=\"index.php\">$goBack</a>";
     }
 } else {
-    echo "Failed to make/edit post <a href=\"index.php\">Go Back</a>";
+    echo "$failed <a href=\"index.php\">$goBack</a>";
 }
 ?>

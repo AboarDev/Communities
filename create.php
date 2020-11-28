@@ -30,16 +30,20 @@ class NewPost extends AbstractDisplayable implements IDisplayable {
     public function displayBodyContent(){
         $content = $this->data["postTitle"] ?? "";
         $text = $this->data["bodyText"] ?? "";
+
+        $postTitle = $this->data["post_title"] ?? "";
+        $postText = $this->data["post_text"] ?? "";
+        $submit = $this->data["submit"] ?? "";
         echo "<div>
-        <label for=\"title\" class=\"form_label\">Post Title</label>
+        <label for=\"title\" class=\"form_label\">$postTitle</label>
         <br />
         <input type=\"text\" id=\"title\" name=\"title\" minlength=\"2\" maxlength=\"30\" value=\"$content\">
         </div>
-        <label for=\"posttext\" class=\"form_label\">Post Text</label>
+        <label for=\"posttext\" class=\"form_label\">$postText</label>
         <br />
         <textarea name=\"posttext\" id=\"posttext\" cols=\"30\" rows=\"10\">$text</textarea>
         <br />
-        <button id=\"submit\">Submit</button>";
+        <button id=\"submit\">$submit</button>";
         if ($this->data["edit"] ?? false){
             $id = $this->data["id"] ?? null;
             echo "<input name=\"edit\" value=\"true\" type=\"hidden\">
@@ -48,7 +52,10 @@ class NewPost extends AbstractDisplayable implements IDisplayable {
     }
 
 }
-$data = [];
+$config = new Config();
+
+$data = $config->getConfig();
+
 if (isset($_REQUEST["edit"])){
     $data["title"] = "New Post";
     $frame = new ViewSite($data,[]);

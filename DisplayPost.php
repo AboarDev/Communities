@@ -34,7 +34,7 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         <strong>$Username</strong>
         </div>
         <div class=\"post_main\">
-        <a href=\"post.php?id=$id\"><h3>$postTitle</h3></a>
+        <h3>$postTitle</h3>
         <p class=\"post_text\">$bodyText</p>
         <div>
         <a href=\"delete.php?id=$id\">$delete</a>

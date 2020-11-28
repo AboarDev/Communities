@@ -20,6 +20,7 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         $home = $this->data["home"] ?? '';
         $newPost = $this->data["new_post"] ?? '';
         $logout = $this->data["logout"] ?? '';
+        $css = $this->data["css"] ?? '';
 
         $signedIn = "";
         $logoutButton = "";
@@ -31,7 +32,8 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         echo "<html lang=\"$lang\">
         <head>
             <title>$title</title>
-            <link rel=\"stylesheet\" href=\"style.css\">
+            <link rel=\"stylesheet\" href=\"Style/base.css\">
+            <link rel=\"stylesheet\" href=\"Style/$css.css\">
         </head><nav>
         <h2 class=\"main_heading\">$title</h2>
         <ul class=\"top_links\">
