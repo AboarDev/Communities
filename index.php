@@ -7,22 +7,26 @@ require_once 'DisplayPost.php';
 require_once 'config.php';
 class HomePage extends AbstractDisplayable implements IDisplayable {
     var $data;
-    public function  __construct($data,$child) {
+    public function  __construct($data,$child)
+    {
         $this->data = $data;
         $this->child = $child;
     }
 
-    public function displayElement(){
+    public function displayElement()
+    {
         $this->displayStart();
         $this->displayBodyContent();
         $this->displayEnd();
     }
 
-    public function displayStart(){
+    public function displayStart()
+    {
         echo "";
     }
 
-    public function displayBodyContent(){
+    public function displayBodyContent()
+    {
         $username = $this->data["username"] ?? '';
         $password = $this->data["password"] ?? '';
         $login = $this->data["login"] ?? '';
@@ -38,12 +42,13 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
         }
     }
 
-    public function displayEnd(){
+    public function displayEnd()
+    {
         $home = $this->data["home"] ?? '';
         $search = $this->data["search"] ?? '';
         echo "
         <h2>$home</h2>
-        <form class=\"search\" action=\"index.php\" method=\"post\">
+        <form class=\"search\" action=\"\" method=\"get\">
         <label for=\"name\" class=\"form_label\">$search</label>
         <input type=\"text\" id=\"name\" name=\"name\" minlength=\"2\" maxlength=\"30\">
         </form>";
@@ -57,10 +62,16 @@ $home = new HomePage($config->getConfig(),false);
 $frame = new ViewSite($data,[$home]);
 $controller = new Controller($frame);
 $controller->connect();
+
 $postCallback = function($theData) use ($data){
     return new DisplayPost(array_merge($theData,$data),false);
 };
-$controller->getPosts($postCallback);
+$search = isset($_REQUEST["name"]);
+if (!$search){
+    $controller->getPosts($postCallback);
+} else {
+    $controller->getPostsByName($postCallback,$_REQUEST["name"]);
+}
 $loggedIn = $controller->verify();
 $home->data["showLoginForm"] = $loggedIn;
 $controller->display();

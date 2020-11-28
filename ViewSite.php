@@ -3,18 +3,21 @@ require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
 class ViewSite extends AbstractDisplayable implements IDisplayable {
     var $data;
-    public function  __construct($data,$child) {
+    public function  __construct($data,$child)
+    {
         $this->data = $data;
         $this->child = $child;
     }
 
-    public function displayElement(){
+    public function displayElement()
+    {
         $this->displayStart();
         $this->displayBodyContent();
         $this->displayEnd();
     }
 
-    public function displayStart(){
+    public function displayStart()
+    {
         $title = $this->data["name"] ?? '';
         $lang = $this->data["code"] ?? '';
         $home = $this->data["home"] ?? '';
@@ -46,7 +49,8 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         <main>";
     }
 
-    public function displayBodyContent(){
+    public function displayBodyContent()
+    {
         if (is_array ( $this->child )){
             foreach ($this->child as &$child){
                 $child->displayElement();
@@ -57,7 +61,8 @@ class ViewSite extends AbstractDisplayable implements IDisplayable {
         }
     }
 
-    public function displayEnd(){
+    public function displayEnd()
+    {
         echo "</main></html>";
     }
 }
