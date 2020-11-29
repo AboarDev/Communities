@@ -91,26 +91,61 @@ class Controller {
         }
     }
 
+    function postByUser (int $postID) : bool
+    {
+        $id = $_SESSION['userID'];
+        $sql = "select u.Username, u.ID, a.TypeName, p.PostTitle, p.PostText, p.PostTime
+        from post p, users u, AccountType a
+        where p.UserID = u.ID
+        and u.AccType = a.ID
+        and p.PostNum = $postID;";
+        $result = $this->DB->query("Posts",$sql);
+        $data = $result->getQuery();
+        return $data["ID"] == $id;
+    }
+
+    function getAccType () : array
+    {
+        $id = $_SESSION['userID'];
+        $sql = "select u.Username, u.ID, ac.CanPost, ac.CanEdit, ac.CanDelete
+        from Users U, AccountType ac 
+        where U.AccType = ac.ID
+        and u.ID = $id;";
+        $result = $this->DB->query("Posts",$sql);
+        $data = $result->getQuery();
+        return $data;
+    }
+
     function deletePost (int $id) : void
     {
-        $sql = "delete from Post
-        where PostNum = $id;";
-        $this->DB->query("aaa",$sql);
+        if ($this->verify()){
+            $accType = $this->getAccType();
+            if ($accType["CanDelete"] || $this->postByUser($id)){
+                $sql = "delete from Post
+                where PostNum = $id;";
+                $this->DB->query("aaa",$sql);
+            }
+        }
     }
 
     function editPost (int $id, string $newTitle, string $newText) : void
     {
-        $sql = "update Post p
-        set p.PostTitle = '$newTitle', p.PostText = '$newText'
-        where p.PostNum = $id;";
-        $this->DB->query("aaa",$sql);
+        if ($this->verify()){
+            $accType = $this->getAccType();
+            if ($accType["CanEdit"] || $this->postByUser($id)){
+                $sql = "update Post p
+                set p.PostTitle = '$newTitle', p.PostText = '$newText'
+                where p.PostNum = $id;";
+                $this->DB->query("aaa",$sql);
+            }
+        }
     }
 
     function addPost (string $name,string $text) : bool
     {
         if ($this->verify()){
-            $id = $_SESSION['userID'];
-            if ($id != null){
+            $accType = $this->getAccType();
+            if ($accType["CanPost"]){
                 $sql = "insert into Post values (null,$id,current_timestamp(),\"$name\",\"$text\");";
                 $this->DB->query("aaa",$sql);
                 return true;

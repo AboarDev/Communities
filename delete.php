@@ -18,11 +18,6 @@ $display = new SimpleDisplayable($data,false);
 $controller = new Controller($display,$DBName);
 $controller->connect();
 
-if($controller->verify()){
-    $controller->deletePost($id);
-    $display->data["taskSuccess"] = true;
-    $controller->display();
-} else {
-    $display->data["taskSuccess"] = false;
-    $controller->display();
-}
+$controller->deletePost($id);
+$display->data["taskSuccess"] = true;
+$controller->display();

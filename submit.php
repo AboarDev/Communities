@@ -22,7 +22,7 @@ $display = new SimpleDisplayable($data,false);
 $controller = new Controller($display,$DBName);
 $controller->connect();
 
-if ($edit && $controller->verify()){
+if ($edit){
     $controller->editPost($id,$title,$text);
     $display->data["taskSuccess"] = true;
     $controller->display();
