@@ -116,7 +116,7 @@ class Controller {
         return $data;
     }
 
-    function deletePost (int $id) : void
+    function deletePost (int $id) : bool
     {
         if ($this->verify()){
             $accType = $this->getAccType();
@@ -124,11 +124,13 @@ class Controller {
                 $sql = "delete from Post
                 where PostNum = $id;";
                 $this->DB->query("aaa",$sql);
+                return true;
             }
         }
+        return false;
     }
 
-    function editPost (int $id, string $newTitle, string $newText) : void
+    function editPost (int $id, string $newTitle, string $newText) : bool
     {
         if ($this->verify()){
             $accType = $this->getAccType();
@@ -137,8 +139,10 @@ class Controller {
                 set p.PostTitle = '$newTitle', p.PostText = '$newText'
                 where p.PostNum = $id;";
                 $this->DB->query("aaa",$sql);
+                return true;
             }
         }
+        return false;
     }
 
     function addPost (string $name,string $text) : bool
@@ -150,7 +154,6 @@ class Controller {
                 $this->DB->query("aaa",$sql);
                 return true;
             }
-            return false;
         }
         return false;
     }

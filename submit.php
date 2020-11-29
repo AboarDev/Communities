@@ -23,9 +23,13 @@ $controller = new Controller($display,$DBName);
 $controller->connect();
 
 if ($edit){
-    $controller->editPost($id,$title,$text);
-    $display->data["taskSuccess"] = true;
-    $controller->display();
+    if ($controller->editPost($id,$title,$text)){
+        $display->data["taskSuccess"] = true;
+        $controller->display();
+    } else {
+        $display->data["taskSuccess"] = false;
+        $controller->display();
+    }
 } else if (strlen($title) > 0){
     if ($controller->addPost($title,$text)){
         $display->data["taskSuccess"] = true;
