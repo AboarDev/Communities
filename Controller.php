@@ -121,9 +121,10 @@ class Controller {
 
     function getPosts ($postCallback) : void
     {
-        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
-        from post p, users u
+        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
+        from post p, users u, AccountType a
         where p.UserID = u.ID
+        and  u.AccType = a.ID
         order by p.PostTime desc;";
         $result = $this->DB->query("Posts",$sql);
         if ( $this->view != false && $result->getSize() > 0)
@@ -138,10 +139,11 @@ class Controller {
 
     function getPostsByName ($postCallback, string $username) : void
     {
-        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
-        from post p, users u
+        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
+        from post p, users u, AccountType a
         where p.UserID = u.ID
         and u.Username like \"$username\"
+        and  u.AccType = a.ID
         order by p.PostTime desc;";
         $result = $this->DB->query("Posts",$sql);
         if ( $this->view != false && $result->getSize() > 0)

@@ -29,6 +29,7 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         $edit = $this->data["edit"] ?? '';
 
         $Username = $this->data["Username"];
+        $accType = $this->data["TypeName"];
         $postTitle = $this->data["PostTitle"];
         $bodyText = $this->data["PostText"];
         $id = $this->data["PostNum"];
@@ -36,6 +37,7 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         <img class=\"avatar\">
         <br>
         <strong>$Username</strong>
+        <p>$accType</p>
         </div>
         <div class=\"post_main\">
         <h3>$postTitle</h3>
