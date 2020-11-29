@@ -1,6 +1,6 @@
 <?php
-include_once "IResult.php";
-include_once "AbstractResult.php";
+include_once "Interface/IResult.php";
+include_once "Abstract/AbstractResult.php";
 class QueryResult extends AbstractResult implements IResult {
     var $data;
     var $name;

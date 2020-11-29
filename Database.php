@@ -1,6 +1,6 @@
 <?php
-require_once 'AbstractDB.php';
-require_once 'DBInterface.php';
+require_once 'Abstract/AbstractDB.php';
+require_once 'Interface/DBInterface.php';
 class Database extends AbstractDB implements DBInterface {
     var $DB;
     var $host;

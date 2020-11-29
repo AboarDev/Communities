@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 require_once "QueryResult.php";
-require_once "IResult.php";
+require_once "Interface/IResult.php";
 require_once "Database.php";
-require_once "DBInterface.php";
-require_once "IDisplayable.php";
+require_once "Interface/DBInterface.php";
+require_once "Interface/IDisplayable.php";
 
 class Controller {
     var $view;

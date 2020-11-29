@@ -1,6 +1,6 @@
 <?php
-require_once 'IDisplayable.php';
-require_once 'AbstractDisplayable.php';
+require_once 'Interface/IDisplayable.php';
+require_once 'Abstract/AbstractDisplayable.php';
 class SimpleDisplayable extends AbstractDisplayable implements IDisplayable {
 
     public function displayStart()
