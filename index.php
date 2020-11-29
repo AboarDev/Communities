@@ -57,10 +57,12 @@ class HomePage extends AbstractDisplayable implements IDisplayable {
 }
 $config = new Config();
 $data = $config->getConfig();
+
+$DBName = $config->getDBName();
 $data["title"] = "Gaming Community";
 $home = new HomePage($config->getConfig(),false);
 $frame = new ViewSite($data,[$home]);
-$controller = new Controller($frame);
+$controller = new Controller($frame,$DBName);
 $controller->connect();
 
 $postCallback = function($theData) use ($data){

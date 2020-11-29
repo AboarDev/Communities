@@ -8,9 +8,10 @@ require_once "IDisplayable.php";
 class Controller {
     var $view;
     var $DB;
-    function  __construct($view)
+    function  __construct($view, string $dbName)
     {
         $this->view = $view;
+        //gamingsite or hindisite
         $this->DB = new Database("localhost","root","","gamingsite");
         $this->DB->connect();
         session_start();

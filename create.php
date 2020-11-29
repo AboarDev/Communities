@@ -61,11 +61,13 @@ $config = new Config();
 
 $data = $config->getConfig();
 
+$DBName = $config->getDBName();
+
 if (isset($_REQUEST["edit"])){
     $data["title"] = "New Post";
     $frame = new ViewSite($data,[]);
     require_once "Controller.php";
-    $controller = new Controller($frame);
+    $controller = new Controller($frame,$DBName);
     $controller->connect();
     $post = $controller->getPost($_REQUEST["id"]);
     $data["edit"] = true;

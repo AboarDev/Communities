@@ -17,4 +17,7 @@ class Config {
     {
         return $this->config;
     }
+    function getDBName () {
+        return $this->config["db"];
+    }
 }
