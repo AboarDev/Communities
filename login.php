@@ -14,13 +14,15 @@ $goBack = $data["back"] ?? '';
 $success = $data["success"] ?? '';
 $failed = $data["failed"] ?? '';
 
-$display = new SimpleDisplayable([],false);
+$display = new SimpleDisplayable($data,false);
 
 $controller = new Controller($display,$DBName);
 $controller->connect();
 
 if($controller->login($username,$password)){
-    echo "$success <a href=\"index.php\">$goBack</a>";
+    $display->data["taskSuccess"] = true;
+    $controller->display();
 } else {
-    echo "$failed <a href=\"index.php\">$goBack</a>";
+    $display->data["taskSuccess"] = false;
+    $controller->display();
 }

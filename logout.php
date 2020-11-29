@@ -10,10 +10,11 @@ $DBName = $config->getDBName();
 $goBack = $data["back"] ?? '';
 $success = $data["success"] ?? '';
 
-$display = new SimpleDisplayable([],false);
+$display = new SimpleDisplayable($data,false);
 
 $controller = new Controller($display,$DBName);
 $controller->connect();
 $controller->logout();
 
-echo "$success <a href=\"index.php\">$goBack</a>";
+$display->data["taskSuccess"] = true;
+$controller->display();

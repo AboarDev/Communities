@@ -10,7 +10,15 @@ class SimpleDisplayable extends AbstractDisplayable implements IDisplayable {
 
     public function displayBodyContent()
     {
-        echo "";
+        $taskSuccess = $this->data["taskSuccess"] ?? false;
+        $goBack = $this->data["back"] ?? "";
+        $success = $this->data["success"] ?? "";
+        $failed = $this->data["failed"] ?? "";
+        if($taskSuccess){
+            echo "$success <a href=\"index.php\">$goBack</a>";
+        } else {
+            echo "$failed <a href=\"index.php\">$goBack</a>";
+        }
     }
 
     public function displayEnd()

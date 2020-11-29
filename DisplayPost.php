@@ -1,7 +1,6 @@
 <?php
 require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
-require_once 'ViewSite.php';
 class DisplayPost extends AbstractDisplayable implements IDisplayable {
 
     public function displayStart()

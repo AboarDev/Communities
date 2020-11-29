@@ -17,21 +17,25 @@ $goBack = $data["back"] ?? '';
 $success = $data["success"] ?? '';
 $failed = $data["failed"] ?? '';
 
-$display = new SimpleDisplayable([],false);
+$display = new SimpleDisplayable($data,false);
 
 $controller = new Controller($display,$DBName);
 $controller->connect();
 
 if ($edit && $controller->verify()){
     $controller->editPost($id,$title,$text);
-    echo "$success <a href=\"index.php\">$goBack</a>";
+    $display->data["taskSuccess"] = true;
+    $controller->display();
 } else if (strlen($title) > 0){
     if ($controller->addPost($title,$text)){
-        echo "$success <a href=\"index.php\">$goBack</a>";
+        $display->data["taskSuccess"] = true;
+        $controller->display();
     } else {
-        echo "$failed <a href=\"index.php\">$goBack</a>";
+        $display->data["taskSuccess"] = false;
+        $controller->display();
     }
 } else {
-    echo "$failed <a href=\"index.php\">$goBack</a>";
+    $display->data["taskSuccess"] = false;
+    $controller->display();
 }
 ?>
