@@ -8,9 +8,11 @@ require_once "IDisplayable.php";
 class Controller {
     var $view;
     var $DB;
+    var $dbName;
     function  __construct($view, string $dbName)
     {
         $this->view = $view;
+        $this->dbName = $dbName;
         $this->DB = new Database("localhost","root","",$dbName);
         $this->DB->connect();
         session_start();
@@ -25,6 +27,7 @@ class Controller {
         $this->DB->createDB();
         $this->DB->selectDB();
         $this->DB->makeTables();
+        $this->DB->insertSampleData($this->dbName);
     }
 
     function verify (): bool 
