@@ -2,19 +2,6 @@
 require_once 'IDisplayable.php';
 require_once 'AbstractDisplayable.php';
 class ViewSite extends AbstractDisplayable implements IDisplayable {
-    var $data;
-    public function  __construct($data,$child)
-    {
-        $this->data = $data;
-        $this->child = $child;
-    }
-
-    public function displayElement()
-    {
-        $this->displayStart();
-        $this->displayBodyContent();
-        $this->displayEnd();
-    }
 
     public function displayStart()
     {
