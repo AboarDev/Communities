@@ -121,7 +121,7 @@ class Controller {
 
     function getPosts ($postCallback) : void
     {
-        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
+        $sql = "select u.Username, u.FirstName, u.LastName, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
         from post p, users u, AccountType a
         where p.UserID = u.ID
         and  u.AccType = a.ID

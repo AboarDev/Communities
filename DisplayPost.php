@@ -33,11 +33,16 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
         $postTitle = $this->data["PostTitle"];
         $bodyText = $this->data["PostText"];
         $id = $this->data["PostNum"];
+        $FirstName = $this->data["FirstName"];
+        $LastName = $this->data["LastName"];
         echo "<div class=\"post_side\">
         <img class=\"avatar\">
         <br>
-        <strong>$Username</strong>
-        <p>$accType</p>
+        <strong>$Username</strong>";
+        if ($this->data["db"] == "hindisite"){
+            echo "<p><i>$FirstName $LastName</i></p>";
+        }
+        echo "<p>$accType</p>
         </div>
         <div class=\"post_main\">
         <h3>$postTitle</h3>
