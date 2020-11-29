@@ -33,7 +33,6 @@ class Database extends AbstractDB implements DBInterface {
     }
 
     public function createDB(){
-        //CREATE DATABASE IF NOT EXISTS DBname
         $sql = "Create DATABASE $this->dbName";
         $this->DB->query($sql);
     }
@@ -44,9 +43,7 @@ class Database extends AbstractDB implements DBInterface {
             TypeName varchar(10),
             CanPost bool,
             CanDelete bool,
-            CanEdit bool,
-            CanMove bool,
-            CanLock bool
+            CanEdit bool
         );";
         $this->DB->query($sql);
         $sql = "create table Users (

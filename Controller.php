@@ -11,8 +11,7 @@ class Controller {
     function  __construct($view, string $dbName)
     {
         $this->view = $view;
-        //gamingsite or hindisite
-        $this->DB = new Database("localhost","root","","gamingsite");
+        $this->DB = new Database("localhost","root","",$dbName);
         $this->DB->connect();
         session_start();
     }
