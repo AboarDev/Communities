@@ -100,7 +100,7 @@ class Database extends AbstractDB implements DBInterface {
         $sql = "insert into Users values (1,'TestUser','$basePassword','Shokuhou','Misaki',current_date(),1);";
         $this->DB->query($sql);
         if ($dbName == "gamingsite"){
-            $sql = "insert into Users values (2,'TestDeveloper','$basePassword','Kanzak','Kaori',current_date(),2);";
+            $sql = "insert into Users values (2,'TestDeveloper','$basePassword','Kanzaki','Kaori',current_date(),2);";
             $this->DB->query($sql);
         } else if ($dbName == "hindisite"){
             $sql = "insert into Users values (3,'TestHelper','$basePassword','Shirai','Kuroko',current_date(),3);";

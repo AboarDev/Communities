@@ -1,7 +1,7 @@
 <?php
 require_once "Controller.php";
 require_once "config.php";
-
+require_once "SimpleDisplayable.php";
 
 $username = $_REQUEST["username"];
 $password = $_REQUEST["password"];
@@ -14,7 +14,9 @@ $goBack = $data["back"] ?? '';
 $success = $data["success"] ?? '';
 $failed = $data["failed"] ?? '';
 
-$controller = new Controller(false,$DBName);
+$display = new SimpleDisplayable([],false);
+
+$controller = new Controller($display,$DBName);
 $controller->connect();
 
 if($controller->login($username,$password)){

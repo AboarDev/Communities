@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 require_once "QueryResult.php";
 require_once "IResult.php";
 require_once "Database.php";
@@ -9,7 +10,7 @@ class Controller {
     var $view;
     var $DB;
     var $dbName;
-    function  __construct($view, string $dbName)
+    function  __construct(IDisplayable $view, string $dbName)
     {
         $this->view = $view;
         $this->dbName = $dbName;
@@ -137,7 +138,7 @@ class Controller {
         }
     }
 
-    function getPostsByName ($postCallback, string $username) : void
+    function getPostsByName (Closure $postCallback, string $username) : void
     {
         $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
         from post p, users u, AccountType a
