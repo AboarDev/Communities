@@ -77,6 +77,8 @@ class Database extends AbstractDB implements DBInterface {
 
     public function insertSampleData($dbName)
     {
+        //default password is password for testing
+        $basePassword = password_hash("password", PASSWORD_DEFAULT);
         //db name either gamingsite or hindisite
         $sql = "insert into AccountType values (5,'Admin',true,true,true);";
         $this->DB->query($sql);
@@ -91,28 +93,32 @@ class Database extends AbstractDB implements DBInterface {
             $sql = "insert into AccountType values (3,'Helper',true,false,true);";
             $this->DB->query($sql);
         }
-        $sql = "insert into Users values (5,'TestAdmin','password','Kamijou','Touma',current_date(),5);";
+        $sql = "insert into Users values (5,'TestAdmin','$basePassword','Kamijou','Touma',current_date(),5);";
         $this->DB->query($sql);
-        $sql = "insert into Users values (4,'TestModerator','password','Misaka','Mikoto',current_date(),4);";
+        $sql = "insert into Users values (4,'TestModerator','$basePassword','Misaka','Mikoto',current_date(),4);";
         $this->DB->query($sql);
-        $sql = "insert into Users values (1,'TestUser','password','Shokuhou','Misaki',current_date(),1);";
+        $sql = "insert into Users values (1,'TestUser','$basePassword','Shokuhou','Misaki',current_date(),1);";
         $this->DB->query($sql);
         if ($dbName == "gamingsite"){
-            $sql = "insert into Users values (2,'TestDeveloper','password','Kanzak','Kaori',current_date(),2);";
+            $sql = "insert into Users values (2,'TestDeveloper','$basePassword','Kanzak','Kaori',current_date(),2);";
             $this->DB->query($sql);
         } else if ($dbName == "hindisite"){
-            $sql = "insert into Users values (3,'TestHelper','password','Shirai','Kuroko',current_date(),3);";
+            $sql = "insert into Users values (3,'TestHelper','$basePassword','Shirai','Kuroko',current_date(),3);";
             $this->DB->query($sql);
         }
-        /* $sql = "";
-        //$this->DB->query($sql);
+        $sql = "insert into Post values (5,5,current_timestamp(),'New Post','Test Post');";
+        $this->DB->query($sql);
+        $sql = "insert into Post values (4,4,current_timestamp(),'New Post','Test Post');";
+        $this->DB->query($sql);
+        $sql = "insert into Post values (1,1,current_timestamp(),'New Post','Test Post');";
+        $this->DB->query($sql);
         if ($dbName == "gamingsite"){
-            $sql = "";
-            //$this->DB->query($sql);
+            $sql = "insert into Post values (2,2,current_timestamp(),'New Post','Test Post');";
+            $this->DB->query($sql);
         } else if ($dbName == "hindisite"){
-            $sql = "";
-            //$this->DB->query($sql);
-        } */
+            $sql = "insert into Post values (3,3,current_timestamp(),'New Post','Test Post');";
+            $this->DB->query($sql);
+        }
     }
 
     public function query($name,$sql)
