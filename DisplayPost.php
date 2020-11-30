@@ -5,7 +5,6 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
 
     public function displayStart()
     {
-       
         echo "<div class=\"post\">";
     }
 

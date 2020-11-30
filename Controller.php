@@ -42,17 +42,13 @@ class Controller {
 
     function display () : void
     {
-        if ( $this->view != false )
-        {
-            if ($this->verify()){
-                $this->view->data["signedIn"] = true;
-                $this->view->data["username"] = $this->getUsername();
-            }else {
-                $this->view->data["signedIn"] = false;
-            }
-            
-            $this->view->displayElement();
+        if ($this->verify()){
+            $this->view->data["signedIn"] = true;
+            $this->view->data["username"] = $this->getUsername();
+        }else {
+            $this->view->data["signedIn"] = false;
         }
+        $this->view->displayElement();
     }
 
     function getUsername ():string 
