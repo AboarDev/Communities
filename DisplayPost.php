@@ -13,14 +13,16 @@ class DisplayPost extends AbstractDisplayable implements IDisplayable {
     {
         $delete = $this->data["delete"] ?? '';
         $edit = $this->data["edit"] ?? '';
-
         $Username = $this->data["Username"];
-        $accType = $this->data["TypeName"];
         $postTitle = $this->data["PostTitle"];
         $bodyText = $this->data["PostText"];
         $id = $this->data["PostNum"];
         $FirstName = $this->data["FirstName"];
         $LastName = $this->data["LastName"];
+
+        $accTypeKey = $this->data["TypeName"];
+        $accType = $this->data[$accTypeKey] ?? "";
+        
         echo "<div class=\"post_side\">
         <img class=\"avatar\">
         <br>

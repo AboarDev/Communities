@@ -80,17 +80,17 @@ class Database extends AbstractDB implements DBInterface {
         //default password is password for testing
         $basePassword = password_hash("password", PASSWORD_DEFAULT);
         //db name either gamingsite or hindisite
-        $sql = "insert into AccountType values (5,'Admin',true,true,true);";
+        $sql = "insert into AccountType values (5,'admin',true,true,true);";
         $this->DB->query($sql);
-        $sql = "insert into AccountType values (4,'Moderator',true,true,false);";
+        $sql = "insert into AccountType values (4,'moderator',true,true,false);";
         $this->DB->query($sql);
-        $sql = "insert into AccountType values (1,'User',true,false,false);";
+        $sql = "insert into AccountType values (1,'user',true,false,false);";
         $this->DB->query($sql);
         if ($dbName == "gamingsite"){
-            $sql = "insert into AccountType values (2,'Developer',true,false,false);";
+            $sql = "insert into AccountType values (2,'developer',true,false,false);";
             $this->DB->query($sql);
         } else if ($dbName == "hindisite"){
-            $sql = "insert into AccountType values (3,'Helper',true,false,true);";
+            $sql = "insert into AccountType values (3,'helper',true,false,true);";
             $this->DB->query($sql);
         }
         $sql = "insert into Users values (5,'TestAdmin','$basePassword','Kamijou','Touma',current_date(),5);";
