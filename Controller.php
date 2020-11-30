@@ -145,11 +145,21 @@ class Controller {
         return false;
     }
 
+    function getPost (int $id)
+    {
+        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime
+        from post p, users u
+        where p.PostNum = $id;";
+        $result = $this->DB->query("Posts",$sql);
+        return $result->getQuery();
+    }
+
     function addPost (string $name,string $text) : bool
     {
         if ($this->verify()){
             $accType = $this->getAccType();
             if ($accType["CanPost"]){
+                $id = $_SESSION['userID'];
                 $sql = "insert into Post values (null,$id,current_timestamp(),\"$name\",\"$text\");";
                 $this->DB->query("aaa",$sql);
                 return true;
@@ -178,7 +188,7 @@ class Controller {
 
     function getPostsByName (Closure $postCallback, string $username) : void
     {
-        $sql = "select u.Username, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
+        $sql = "select u.Username, u.FirstName, u.LastName, u.ID, p.PostNum, p.PostTitle, p.PostText, p.PostTime, a.TypeName
         from post p, users u, AccountType a
         where p.UserID = u.ID
         and u.Username like \"$username\"
