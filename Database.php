@@ -78,8 +78,8 @@ class Database extends AbstractDB implements DBInterface {
 
     public function insertSampleData($dbName)
     {
-        //default password is password for testing
-        $basePassword = password_hash("password", PASSWORD_DEFAULT);
+        //default password is PHP156r3@t for testing
+        $basePassword = password_hash("PHP156r3@t", PASSWORD_DEFAULT);
         //db name either gamingsite or hindisite
         $sql = "insert into AccountType values (5,'admin',true,true,true);";
         $this->DB->query($sql);
