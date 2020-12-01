@@ -1,4 +1,5 @@
 <?php
+namespace Communities;
 class Config {
     var $config;
     function  __construct()

@@ -1,5 +1,5 @@
 <?php
-
+namespace Communities;
 interface DBInterface {
     public function connect();
 

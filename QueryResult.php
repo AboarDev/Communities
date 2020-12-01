@@ -1,4 +1,5 @@
 <?php
+namespace Communities;
 include_once "Interface/IResult.php";
 include_once "Abstract/AbstractResult.php";
 class QueryResult extends AbstractResult implements IResult {

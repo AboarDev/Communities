@@ -1,5 +1,5 @@
 <?php
-
+namespace Communities;
 interface IDisplayable {
     public function displayElement();
 

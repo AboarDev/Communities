@@ -1,4 +1,5 @@
 <?php
+namespace Communities;
 require_once 'Interface/IDisplayable.php';
 require_once 'Abstract/AbstractDisplayable.php';
 class ViewSite extends AbstractDisplayable implements IDisplayable {

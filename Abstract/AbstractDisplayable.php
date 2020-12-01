@@ -1,5 +1,5 @@
 <?php
-
+namespace Communities;
 abstract class AbstractDisplayable {
     var $data;
     var $child;

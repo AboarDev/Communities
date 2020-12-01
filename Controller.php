@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+namespace Communities;
 require_once "QueryResult.php";
 require_once "Interface/IResult.php";
 require_once "Database.php";

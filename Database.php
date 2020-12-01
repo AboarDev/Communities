@@ -1,4 +1,5 @@
 <?php
+namespace Communities;
 require_once 'Abstract/AbstractDB.php';
 require_once 'Interface/DBInterface.php';
 class Database extends AbstractDB implements DBInterface {
@@ -18,7 +19,7 @@ class Database extends AbstractDB implements DBInterface {
 
     public function connect()
     {
-        $this->DB = new mysqli($this->host, $this->username, $this->pwd);
+        $this->DB = new \mysqli($this->host, $this->username, $this->pwd);
     }
 
     public function closeDB()

@@ -1,5 +1,5 @@
 <?php
-
+namespace Communities;
 //https://stackoverflow.com/questions/85816/how-can-i-force-users-to-access-my-page-over-https-instead-of-http?noredirect=1&lq=1
 if($_SERVER["HTTPS"] != "on")
 {

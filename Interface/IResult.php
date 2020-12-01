@@ -1,5 +1,5 @@
 <?php
-
+namespace Communities;
 interface IResult {
     public function getSize();
     
