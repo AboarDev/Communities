@@ -1,4 +1,12 @@
 <?php
+
+//https://stackoverflow.com/questions/85816/how-can-i-force-users-to-access-my-page-over-https-instead-of-http?noredirect=1&lq=1
+if($_SERVER["HTTPS"] != "on")
+{
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
+
 require_once "Controller.php";
 require_once 'ViewSite.php';
 require_once 'DisplayPost.php';
